@@ -98,7 +98,7 @@
 
 	<shape type="obj">
 		<ref id="metal"/>
-		<string name="filename" value="sphere.obj"/>
+		<string name="filename" value="../SceneData/sphere.obj"/>
 		<transform name="toWorld">
 			<scale value="1.0"/>
 			<translate x="275" y="275" z="275"/>
@@ -107,7 +107,7 @@
 
 	<shape type="obj">
 		<ref id="wall"/>
-		<string name="filename" value="block.obj"/>
+		<string name="filename" value="../SceneData/block.obj"/>
 		<transform name="toWorld">
 			<scale value="50.0"/>
 			<translate x="275" y="775" z="275"/>

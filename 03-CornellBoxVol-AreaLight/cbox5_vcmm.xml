@@ -2,11 +2,10 @@
 
 <scene version="0.5.0">
 	<integrator type="vcmm">
+		<boolean name="lightImage" value="false"/>
 		<integer name="maxDepth" value="5"/>
-		<float name="radiusScale" value="4"/>
-		<integer name="timeout" value="28800"/>
-		<boolean name="useUnbiasVM" value="false"/>
-		<boolean name="useVM" value="false"/>
+		<integer name="timeout" value="60"/>
+		<boolean name="useVC" value="false"/>
 	</integrator>
 
 	<sensor type="perspective">
@@ -52,68 +51,23 @@
 		<spectrum name="reflectance" value="400:0.78, 500:0.78, 600:0.78, 700:0.78"/>
 	</bsdf>
 
-	<medium name="interior" type="homogeneous" id="cubemedium">
-		<rgb name="sigmaS" value="0.004, 0.004, 0.004"/>
-		<rgb name="sigmaA" value="0.00001, 0.00001, 0.00001"/>
-
-		<phase type="hg">
-			<float name="g" value="0."/>
-		</phase>
-	</medium>
-
 	<shape name="boundBox" type="cube">
-		<ref name="interior" id="cubemedium"/>
+		<medium name="interior" type="homogeneous">
+			<rgb name="sigmaS" value="0.014, 0.014, 0.014"/>
+			<rgb name="sigmaA" value="0.00001, 0.00001, 0.00001"/>
+
+			<phase type="hg">
+				<float name="g" value="0."/>
+			</phase>
+		</medium>
 		<transform name="toWorld">
-			<scale x="400" y="400" z="150"/>
+			<scale x="100" y="100" z="100"/>
 			<translate x="275" y="275" z="275"/>
 		</transform>
-	</shape>
-
-	<emitter type="point">
-		<!--ref name="interior" id="cubemedium"/-->
-		<point name="position" x="275" y="2250" z="275"/>
-		<rgb name="intensity" value="1000500000,1000500000,1000500000"/>
-	</emitter>
-	<!--emitter type="directional">
-		<transform name="toWorld">
-			<lookat target="0, -1, 0" origin="0, 1, 0"/>
-		</transform>
-		<spectrum name="irradiance" value="100,100,100"/>
-	</emitter-->
-
-	<bsdf type="dielectric" id="glass">
-		<float name="intIOR" value="1.5"/>
-		<!--spectrum name="specular Transmittance" value="1.0, 1.0, 1.0"-->
-	</bsdf>
-
-	<bsdf type="phong" id="metal">
-		<float name="exponent" value="10000"/>
-		<spectrum name="specularReflectance" value="1, 1, 1"/>
-		<spectrum name="diffuseReflectance" value="0.07 0.07 0.07"/>
-	</bsdf>
-
-	<bsdf type="diffuse" id="wall">
-		<spectrum name="reflectance" value="0.7, 0.7, 0.7"/>
-	</bsdf>
-
-	<shape type="obj">
-		<ref id="metal"/>
-		<string name="filename" value="../SceneData/sphere.obj"/>
-		<transform name="toWorld">
-			<scale value="1.0"/>
-			<translate x="275" y="275" z="275"/>
-		</transform>
+		<!--ref id="box"/-->
 	</shape>
 
 	<shape type="obj">
-		<ref id="wall"/>
-		<string name="filename" value="../SceneData/block.obj"/>
-		<transform name="toWorld">
-			<scale value="50.0"/>
-			<translate x="275" y="775" z="275"/>
-		</transform>
-	</shape>
-	<!--shape type="obj">
 		<string name="filename" value="meshes/cbox_luminaire.obj"/>
 		<transform name="toWorld">
 			<translate x="0" y="-0.5" z="0"/>
@@ -124,8 +78,9 @@
 		<emitter type="area">
 			<spectrum name="radiance" value="400:0, 500:8, 600:15.6, 700:18.4"/>
 		</emitter>
-	</shape-->
-	<!--shape type="obj">
+	</shape>
+
+	<shape type="obj">
 		<string name="filename" value="meshes/cbox_floor.obj"/>
 
 		<ref id="white"/>
@@ -153,7 +108,7 @@
 		<string name="filename" value="meshes/cbox_redwall.obj"/>
 
 		<ref id="red"/>
-	</shape-->
+	</shape>
 	<!--shape type="obj">
 		<string name="filename" value="meshes/cbox_smallbox.obj"/>
 

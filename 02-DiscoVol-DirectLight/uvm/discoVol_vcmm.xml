@@ -2,11 +2,11 @@
 
 <scene version="0.5.0">
 	<integrator type="vcmm">
+		<boolean name="lightImage" value="false"/>
 		<integer name="maxDepth" value="5"/>
 		<float name="radiusScale" value="4"/>
-		<integer name="timeout" value="28800"/>
-		<boolean name="useUnbiasVM" value="false"/>
-		<boolean name="useVM" value="false"/>
+		<integer name="timeout" value="120"/>
+		<boolean name="useVC" value="false"/>
 	</integrator>
 
 	<sensor type="perspective">
@@ -68,18 +68,21 @@
 			<translate x="275" y="275" z="275"/>
 		</transform>
 	</shape>
+	<!--emitter type="point">
+		<ref name="interior" id="cubemedium"/>
+		<point name="position" x="275" y="550" z="275"/>
+		<rgb name="intensity" value="350000,350000,350000"/>
+	</emitter-->
 
-	<emitter type="point">
+	<emitter type="directional">
 		<!--ref name="interior" id="cubemedium"/-->
-		<point name="position" x="275" y="2250" z="275"/>
-		<rgb name="intensity" value="1000500000,1000500000,1000500000"/>
-	</emitter>
-	<!--emitter type="directional">
 		<transform name="toWorld">
+
 			<lookat target="0, -1, 0" origin="0, 1, 0"/>
 		</transform>
+		<!--rgb name="intensity" value="350000,350000,350000"/-->
 		<spectrum name="irradiance" value="100,100,100"/>
-	</emitter-->
+	</emitter>
 
 	<bsdf type="dielectric" id="glass">
 		<float name="intIOR" value="1.5"/>
@@ -98,7 +101,7 @@
 
 	<shape type="obj">
 		<ref id="metal"/>
-		<string name="filename" value="../SceneData/sphere.obj"/>
+		<string name="filename" value="../sphere.obj"/>
 		<transform name="toWorld">
 			<scale value="1.0"/>
 			<translate x="275" y="275" z="275"/>
@@ -107,7 +110,7 @@
 
 	<shape type="obj">
 		<ref id="wall"/>
-		<string name="filename" value="../SceneData/block.obj"/>
+		<string name="filename" value="../block.obj"/>
 		<transform name="toWorld">
 			<scale value="50.0"/>
 			<translate x="275" y="775" z="275"/>
